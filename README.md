@@ -8,6 +8,8 @@ To complete this quickstart you will need an active Azure Subscription and the f
 
 If you do not have those tools installed locally, you can use the [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart) in your web browser.
 
+## Deploy the Application
+
 1. Clone this repository
 
     ```bash
@@ -68,6 +70,8 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
 
 5. After a moment the web app will restart and initialize JBoss with the new application. Browse to the app at `http://<your-site-name>.azurewebsites.net/testHA.jsp`.
 
-   The web page will display your session ID, the JBoss instance ID, and a simple counter. Increment the counter and refresh the web page. You should see a new JBoss EAP instance ID, but the counter will display the same session and counter information. This means that the stateful session information was shared between the first and second EAP instances, and even though you were routed to a different instance the session information was persisted across instances.
+## Explore the app
 
-   ToDo: add pictures here of the pages (before & after)
+The table in the web page displays your current session ID, the JBoss instance ID, and a simple counter. Increment the counter and refresh the web page. You should see a new JBoss EAP instance ID, but the counter will display the same session and counter information. This means that the stateful session information was shared between the first and second EAP instances. Even though you were routed to a different cluster member the session information was persisted across instances.
+
+![](sample-webpage.PNG)
