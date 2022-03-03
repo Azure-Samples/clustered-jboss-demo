@@ -1,57 +1,73 @@
-# Project Name
+# Clustered JBoss Quickstart
 
-(short, 1-3 sentenced, description of the project)
+To complete this quickstart you will need an active Azure Subscription and the following tools installed on your machine: 
 
-## Features
+- Azure CLI
+- Java 11
+- Maven
 
-This project framework provides the following features:
+If you do not have those tools installed locally, you can use the [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart) in your web browser.
 
-* Feature 1
-* Feature 2
-* ...
+1. Clone this repository
 
-## Getting Started
+    ```bash
+    git clone https://github.com/JasonFreeberg/clustered-jboss.git
+    ```
 
-### Prerequisites
+2. Run the shell commands below to create a resource group and deploy the ARM template. The template will create a Virtual Network, App Service Plan, and JBoss EAP web app. The `WEBAPP_NAME` must be globally unique, so consider using your name or appending numbers to ensure it's unique.
 
-(ideally very short, if any)
+    **Bash**
 
-- OS
-- Library version
-- ...
+    ```bash
+    WEBAPP_NAME=<provide a unique name>  # upper and lowercase letters, numbers, and dashes OK
+    LOCATION=eastus
+    RESOURCE_GROUP=jboss-rg
+    az group create --name $RESOURCE_GROUP --location $LOCATION
+    az deployment group create \
+        --name jboss_deployment \
+        --resource-group $RESOURCE_GROUP \
+        --template-file arm-template.json \
+        --parameters jboss_app_name=$WEBAPP_NAME
+    ```
 
-### Installation
+    **PowerShell**
 
-(ideally very short)
+    ```powershell
+    $env:WEBAPP_NAME=''
+    $env:LOCATION='westus'
+    $env:RESOURCE_GROUP='jboss-rg'
+    az group create --name $env:RESOURCE_GROUP --location $env:LOCATION
+    az deployment group create `
+        --name jboss_deployment `
+        --resource-group $env:RESOURCE_GROUP `
+        --template-file arm-template.json `
+        --parameters jboss_app_name=$env:WEBAPP_NAME
+    ```
 
-- npm install [package name]
-- mvn install
-- ...
+    The App Service Plan is configured to have 3 JBoss EAP instances which will form the cluster.
 
-### Quickstart
-(Add steps to get up and running quickly)
+3. Build the app with Maven.
 
-1. git clone [repository clone url]
-2. cd [respository name]
-3. ...
+    ```bash
+    mvn clean package
+    ```
 
+4. Deploy the app using the Azure CLI.
 
-## Demo
+    **Bash**
 
-A demo app is included to show how to use the project.
+    ```bash
+    az webapp deploy -n $WEBAPP_NAME -g $RESOURCE_GROUP --src-path target/session-replication.war --type war
+    ```
 
-To run the demo, follow these steps:
+    **PowerShell**
 
-(Add steps to start up the demo)
+    ```PowerShell
+    az webapp deploy -n $env:WEBAPP_NAME -g $env:RESOURCE_GROUP --src-path target/session-replication.war --type war
+    ```
 
-1.
-2.
-3.
+5. After a moment the web app will restart and initialize JBoss with the new application. Browse to the app at `http://<your-site-name>.azurewebsites.net/testHA.jsp`.
 
-## Resources
+   The web page will display your session ID, the JBoss instance ID, and a simple counter. Increment the counter and refresh the web page. You should see a new JBoss EAP instance ID, but the counter will display the same session and counter information. This means that the stateful session information was shared between the first and second EAP instances, and even though you were routed to a different instance the session information was persisted across instances.
 
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+   ToDo: add pictures here of the pages (before & after)
