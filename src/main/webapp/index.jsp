@@ -15,7 +15,8 @@
         File hostnameFile = new File("/etc/hostname");
         BufferedReader br = new BufferedReader(new FileReader(hostnameFile));
         String hostname = br.readLine();
-
+        
+        java.net.InetAddress inetAdd = java.net.InetAddress.getLocalHost();
         String hostIP = inetAdd.getHostAddress();
     
         // get counter
@@ -63,7 +64,7 @@
 
         <!-- Jumbotron -->
         <div class="p-5 text-center bg-light">
-            <h1 class="mb-3">Red Hat JBoss EAP on Azure App Service</h1>
+            <h1 class="mb-3">Red Hat JBoss EAP on Azure App Service -- FROM STORAGE ACCOUNT</h1>
             <h4 class="mb-3">Demonstrating session replication across cluster nodes</h4>
             <a class="btn btn-primary" href="index.jsp?action=increment" role="button">Increment counter</a>
             <br>
