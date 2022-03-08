@@ -59,13 +59,13 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
     **Bash**
 
     ```bash
-    az webapp deploy -n $WEBAPP_NAME -g $RESOURCE_GROUP --src-path target/session-replication.war --type war
+    az webapp deploy -n $WEBAPP_NAME -g $RESOURCE_GROUP --src-path target/session-replication.war
     ```
 
     **PowerShell**
 
     ```PowerShell
-    az webapp deploy -n $env:WEBAPP_NAME -g $env:RESOURCE_GROUP --src-path target/session-replication.war --type war
+    az webapp deploy -n $env:WEBAPP_NAME -g $env:RESOURCE_GROUP --src-path target/session-replication.war
     ```
 
 5. After a moment the web app will restart and initialize JBoss with the new application. Browse to the app at `http://<your-site-name>.azurewebsites.net/testHA.jsp`.
