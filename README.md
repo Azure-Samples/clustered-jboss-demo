@@ -13,7 +13,7 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
 1. Clone this repository
 
     ```bash
-    git clone https://github.com/JasonFreeberg/clustered-jboss.git
+    git clone https://github.com/Azure-Samples/clustered-jboss-demo.git
     ```
 
 2. Run the shell commands below to create a resource group and deploy the ARM template. The template will create a Virtual Network, App Service Plan, and JBoss EAP web app. The `WEBAPP_NAME` must be globally unique, so consider using your name or appending numbers to ensure it's unique.
