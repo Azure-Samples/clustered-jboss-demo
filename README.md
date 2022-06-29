@@ -16,14 +16,21 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
     git clone https://github.com/Azure-Samples/clustered-jboss-demo.git
     ```
 
-2. Run the shell commands below to create a resource group and deploy the ARM template. The template will create a Virtual Network, App Service Plan, and JBoss EAP web app. The `WEBAPP_NAME` must be globally unique, so consider using your name or appending numbers to ensure it's unique.
+2. Run the shell commands below to create a resource group and deploy the ARM template. The template will create a Virtual Network, App Service Plan, and JBoss EAP web app.
 
     **Bash**
-
+    
+    Set your desired Web App name, location, and resource group if you have not done so already.
+    
     ```bash
     WEBAPP_NAME=<provide a unique name>  # upper and lowercase letters, numbers, and dashes OK
     LOCATION=eastus
     RESOURCE_GROUP=jboss-rg
+    ```
+    
+    Deploy the ARM Template.
+
+    ```bash
     az group create --name $RESOURCE_GROUP --location $LOCATION
     az deployment group create \
         --name jboss_deployment \
@@ -33,11 +40,18 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
     ```
 
     **PowerShell**
-
+    
+    Set your desired Web App name, location, and resource group if you have not done so already.
+    
     ```powershell
     $env:WEBAPP_NAME=''
     $env:LOCATION='westus'
     $env:RESOURCE_GROUP='jboss-rg'
+    ```
+    
+    Deploy the ARM Template.
+
+    ```powershell
     az group create --name $env:RESOURCE_GROUP --location $env:LOCATION
     az deployment group create `
         --name jboss_deployment `
