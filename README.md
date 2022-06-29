@@ -20,7 +20,7 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
 
     **Bash**
     
-    Set your desired Web App name, location, and resource group if you have not done so already.
+    Set your desired Web App name, location, and resource group if you have not done so prevoiusly.
     
     ```bash
     WEBAPP_NAME=<provide a unique name>  # upper and lowercase letters, numbers, and dashes OK
@@ -41,7 +41,7 @@ If you do not have those tools installed locally, you can use the [Azure Cloud S
 
     **PowerShell**
     
-    Set your desired Web App name, location, and resource group if you have not done so already.
+    Set your desired Web App name, location, and resource group if you have not done so prevoiusly.
     
     ```powershell
     $env:WEBAPP_NAME=''
